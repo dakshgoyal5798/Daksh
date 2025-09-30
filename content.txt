@@ -1,0 +1,183 @@
+1. Breadth First Search (BFS)
+
+Idea: Explores all nodes level by level.
+
+COTS (Completeness, Optimality, Time, Space):
+
+Completeness: Yes (always finds solution if exists).
+
+Optimality: Yes (if all edge costs = 1).
+
+Time Complexity: O(V+E).
+
+Space Complexity: O(V).
+
+Algorithm:
+
+Initialize queue with start node.
+
+While queue not empty, pop node.
+
+Visit it and enqueue unvisited neighbors.
+
+Repeat until goal found or queue empty.
+
+2. Depth First Search (DFS)
+
+Idea: Explores path as deep as possible before backtracking.
+
+COTS:
+
+Completeness: No (fails in infinite depth), Yes with visited-checking.
+
+Optimality: No (may find longer path first).
+
+Time Complexity: O(V+E).
+
+Space Complexity: O(V) due to recursion stack.
+
+Algorithm:
+
+Start from root, mark visited.
+
+Recursively visit first unvisited child.
+
+Backtrack when no children remain.
+
+3. Uniform Cost Search (UCS)
+
+Idea: Expands node with least total path cost.
+
+COTS:
+
+Completeness: Yes (if all edge costs non-negative).
+
+Optimality: Yes (finds least-cost path).
+
+Time Complexity: O(E log V) with priority queue.
+
+Space Complexity: O(V).
+
+Algorithm:
+
+Initialize priority queue with (0, start).
+
+While queue not empty: pop node with least cost.
+
+If goal reached, return path and cost.
+
+Otherwise expand neighbors and update costs.
+
+4. Depth Limited Search (DLS)
+
+Idea: DFS with maximum depth limit.
+
+COTS:
+
+Completeness: No (if goal lies beyond depth limit).
+
+Optimality: No.
+
+Time Complexity: O(b^l), where b = branching factor, l = depth limit.
+
+Space Complexity: O(l).
+
+Algorithm:
+
+Start DFS with depth counter.
+
+If depth = 0 and goal not found, backtrack.
+
+Explore neighbors until limit reached.
+
+5. Iterative Deepening Search (IDS)
+
+Idea: Repeatedly applies DLS with increasing depth.
+
+COTS:
+
+Completeness: Yes (if max depth >= goal depth).
+
+Optimality: Yes (if all edge costs = 1).
+
+Time Complexity: O(b^d), where d = depth of goal.
+
+Space Complexity: O(d).
+
+Algorithm:
+
+For depth = 0 to max_depth:
+a. Run DLS with current depth.
+b. If goal found, return path.
+
+6. Bidirectional Search (BDS)
+
+Idea: Run BFS from start and goal simultaneously, meet in the middle.
+
+COTS:
+
+Completeness: Yes (if graph is finite).
+
+Optimality: Yes (if all edge costs = 1).
+
+Time Complexity: O(b^(d/2)), faster than BFS.
+
+Space Complexity: O(b^(d/2)).
+
+Algorithm:
+
+Initialize BFS from start and goal.
+
+Expand one step from each frontier alternately.
+
+If frontiers meet, return meeting node.
+
+If one frontier is exhausted, no path exists.
+
+7. Greedy Best First Search (GBFS)
+
+Idea: Expands node with lowest heuristic value h(n).
+
+COTS:
+
+Completeness: No (may loop without visited-checking).
+
+Optimality: No (does not consider path cost).
+
+Time Complexity: O(b^m), where m is max depth.
+
+Space Complexity: O(b^m).
+
+Algorithm:
+
+Initialize priority queue with (h[start], start).
+
+While queue not empty:
+a. Pop node with lowest h(n).
+b. If goal, reconstruct path.
+c. Else expand neighbors and push with their h(n).
+
+8. A* Search
+
+Idea: Combines UCS and GBFS using f(n) = g(n) + h(n).
+
+COTS:
+
+Completeness: Yes (if heuristic is admissible and graph finite).
+
+Optimality: Yes (if heuristic is admissible and consistent).
+
+Time Complexity: O(b^d).
+
+Space Complexity: O(b^d).
+
+Algorithm:
+
+Initialize priority queue with (f=start_h, g=0, start).
+
+While queue not empty:
+a. Pop node with lowest f.
+b. If goal, reconstruct path.
+c. Else expand neighbors: update g, f = g + h, push into queue.
+
+If queue empty, no path found.\
